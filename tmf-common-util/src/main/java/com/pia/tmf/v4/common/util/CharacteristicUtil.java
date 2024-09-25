@@ -300,9 +300,13 @@ public final class CharacteristicUtil {
         .collect(
             Collectors.toMap(
                 Characteristic::getName,
-                CharacteristicUtil::getStringValue,
+                c -> emptyINull(CharacteristicUtil.getStringValue(c)),
                 (a, b) -> b,
                 HashMap::new));
+  }
+
+  private static String emptyINull(String s) {
+    return s == null ? "" : s;
   }
 
   private static IllegalArgumentException mandatoryCharacteristicNotFound(String name) {
