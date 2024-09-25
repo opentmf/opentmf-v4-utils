@@ -1,0 +1,319 @@
+{
+  "id": "1",
+  "expectedCompletionDate": "2022-11-30T07:47:21.829Z",
+  "@baseType": "ProductOrder",
+  "@type": "ProductOrder",
+  "billingAccount": {
+    "href": "/tmf-api/accountManagement/v4/billingAccount/f5555bc2-0924-4b6c-8fb0-566d35dd9044",
+    "@baseType": "Account",
+    "@schemaLocation": "/tmf-api/accountManagement/v4/billingAccount/billingAccount.json",
+    "@type": "BillingAccountRef",
+    "@referredType": "BillingAccount",
+    "id": "f5555bc2-0924-4b6c-8fb0-566d35dd9044",
+    "name": "Test19"
+  },
+  "orderCharacteristic": [
+    {
+      "name": "eventType",
+      "value": "newSubscription"
+    },
+    {
+      "name": "isResponseRequiredByOrderChannel",
+      "value": "false"
+    },
+    {
+      "name": "orderChannel",
+      "value": "UC"
+    }
+  ],
+  "productOrderItem": [
+    {
+      "id": "100",
+      "quantity": 1,
+      "productOffering": {
+        "href": "/tmf-api/productCatalogManagement/v4/productOffering/UCRingCentralOfficeLicenseEntryEdition",
+        "id": "UCRingCentralOfficeLicenseEntryEdition",
+        "name": "Vodafone Business UC - Entry Edition"
+      },
+      "productOrderItemRelationship": [
+        {
+          "id": "100-1",
+          "relationshipType": "bundles"
+        },
+        {
+          "id": "100-2",
+          "relationshipType": "bundles"
+        }
+      ],
+      "action": "add",
+      "product": {
+        "description": "Vodafone Business UC - Entry Edition",
+        "isBundle": true,
+        "name": "Vodafone Business UC - Entry Edition"
+      },
+      "orderItemCharacteristic": [
+        {
+          "name": "shoppingCartId",
+          "value": "cc3364c0-5ec2-4945-a6df-00c09365edfa"
+        },
+        {
+          "name": "shoppingCartItemId",
+          "value": "ac38fbcb"
+        }
+      ]
+    },
+    {
+      "id": "100-1",
+      "quantity": 1,
+      "productOffering": {
+        "href": "/tmf-api/productCatalogManagement/v4/productOffering/UCDigitalLineLicenseEntryOffering",
+        "id": "UCDigitalLineLicenseEntryOffering",
+        "name": "Office License - Entry Edition"
+      },
+      "productOrderItemRelationship": [
+        {
+          "id": "100-2",
+          "relationshipType": "reliesOn"
+        }
+      ],
+      "action": "add",
+      "product": {
+        "productCharacteristic": [
+          {
+            "name": "profileName",
+            "value": ""
+          },
+          {
+            "name": "currency",
+            "value": "EUR"
+          },
+          {
+            "name": "licenseName",
+            "value": ""
+          },
+          {
+            "name": "licenseQuantity",
+            "value": "10"
+          },
+          {
+            "name": "licenseBusinessName",
+            "value": ""
+          },
+          {
+            "name": "licenseSKU",
+            "value": "LC_DL-UNL_50"
+          },
+          {
+            "name": "licenseVendor",
+            "value": "RingCentral"
+          },
+          {
+            "name": "solutionName",
+            "value": ""
+          },
+          {
+            "name": "primaryContactFirstName",
+            "value": "Gökhan"
+          },
+          {
+            "name": "primaryContactLastName",
+            "value": "Demir"
+          },
+          {
+            "name": "primaryContactEmail",
+            "value": "demir.gokhan@vodafone.com"
+          },
+          {
+            "name": "primaryContactMobile",
+            "value": "+905326850084"
+          },
+          {
+            "name": "sendWelcomeEmail",
+            "value": "True"
+          },
+          {
+            "name": "sendConfirmationEmail",
+            "value": ""
+          },
+          {
+            "name": "activateImmediately",
+            "value": ""
+          }
+        ],
+        "productSpecification": {
+          "href": "http://dpc-api-svc/tmf-api/productCatalogManagement/v4/productSpecification/UCDigitalLineLicenseSpecification",
+          "id": "UCDigitalLineLicenseSpecification",
+          "name": "UCDigitalLineLicenseSpecification"
+        },
+        "description": "UC DigitalLine License Entry Offering",
+        "isBundle": false,
+        "name": "Office License - Entry Edition"
+      },
+      "orderItemCharacteristic": [
+        {
+          "name": "shoppingCartId",
+          "value": "cc3364c0-5ec2-4945-a6df-00c09365edfa"
+        },
+        {
+          "name": "shoppingCartItemId",
+          "value": "26bcec8c"
+        }
+      ]
+    },
+    {
+      "id": "100-2",
+      "quantity": 1,
+      "productOffering": {
+        "href": "/tmf-api/productCatalogManagement/v4/productOffering/UCMainNumberOffering",
+        "id": "UCMainNumberOffering",
+        "name": "Main Number"
+      },
+      "action": "add",
+      "product": {
+        "productCharacteristic": [
+          {
+            "name": "siteName",
+            "value": ""
+          },
+          {
+            "name": "mainNumber",
+            "value": ""
+          }
+        ],
+        "productSpecification": {
+          "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCMainNumberSpecification",
+          "id": "UCMainNumberSpecification",
+          "name": "UCMainNumberSpecification"
+        },
+        "description": "UC Main Number Offering",
+        "isBundle": false,
+        "name": "Main Number"
+      },
+      "orderItemCharacteristic": [
+        {
+          "name": "shoppingCartId",
+          "value": "cc3364c0-5ec2-4945-a6df-00c09365edfa"
+        },
+        {
+          "name": "shoppingCartItemId",
+          "value": "632eca84"
+        }
+      ]
+    },
+    {
+      "id": "200",
+      "quantity": 1,
+      "productOffering": {
+        "href": "/tmf-api/productCatalogManagement/v4/productOffering/PSTNGeoNumberOffering",
+        "id": "PSTNGeoNumberOffering",
+        "name": "PSTN Geo Number"
+      },
+      "productOrderItemRelationship": [
+        {
+          "id": "100-2",
+          "relationshipType": "reliesOn"
+        }
+      ],
+      "action": "add",
+      "product": {
+        "productCharacteristic": [
+          {
+            "name": "siteName",
+            "value": "Site 1"
+          },
+          {
+            "name": "serviceProviderName",
+            "value": "TATA"
+          },
+          {
+            "name": "solutionName",
+            "value": ""
+          },
+          {
+            "name": "dependentSolutionName",
+            "value": ""
+          },
+          {
+            "name": "numberCount",
+            "value": "10"
+          }
+        ],
+        "productSpecification": {
+          "href": "/tmf-api/productCatalogManagement/v4/productSpecification/UCPSTNGeoNumberSpecification",
+          "id": "UCPSTNGeoNumberSpecification",
+          "name": "UCPSTNGeoNumberSpecification"
+        },
+        "description": "PSTNGeoNumberOffering",
+        "isBundle": false,
+        "name": "PSTN Geo Number"
+      },
+      "orderItemCharacteristic": [
+        {
+          "name": "shoppingCartId",
+          "value": "cc3364c0-5ec2-4945-a6df-00c09365edfa"
+        },
+        {
+          "name": "shoppingCartItemId",
+          "value": "efcaa63a"
+        }
+      ]
+    },
+    {
+      "id": "300",
+      "quantity": 1,
+      "productOffering": {
+        "href": "/tmf-api/productCatalogManagement/v4/productOffering/VBUCBackEndCompletionProductOffering",
+        "id": "VBUCBackEndCompletionProductOffering",
+        "name": "VBUCBackEndCompletionProductOffering"
+      },
+      "productOrderItemRelationship": [
+        {
+          "id": "100-1",
+          "relationshipType": "reliesOn"
+        },
+        {
+          "id": "100-2",
+          "relationshipType": "reliesOn"
+        },
+        {
+          "id": "200",
+          "relationshipType": "reliesOn"
+        }
+      ],
+      "action": "add",
+      "product": {
+        "productSpecification": {
+          "href": "http://dpc-api-svc/tmf-api/productCatalogManagement/v4/productSpecification/VBUCBackEndCompletionSpecification",
+          "id": "VBUCBackEndCompletionSpecification",
+          "name": "VBUCBackEndCompletionSpecification"
+        },
+        "description": "VBUCBackEndCompletionSpecification",
+        "isBundle": false,
+        "name": "VBUCBackEndCompletionSpecification"
+      }
+    }
+  ],
+  "relatedParty": [
+    {
+      "href": "/tmf-api/party/v4/organization/VFIE",
+      "@referredType": "Organization",
+      "id": "VFIE",
+      "name": "Vodafone Ireland",
+      "role": "operator"
+    },
+    {
+      "href": "/tmf-api/customerManagement/v4/customer/C1060843",
+      "@referredType": "Customer",
+      "id": "C1060843",
+      "name": "Gokhan Test_03",
+      "role": "customer"
+    }
+  ],
+  "category": "UC",
+  "shoppingCart": [
+    {
+      "id": "cc3364c0-5ec2-4945-a6df-00c09365edfa"
+    }
+  ],
+  "pointOfNoReturn": false
+}

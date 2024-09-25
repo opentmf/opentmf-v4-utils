@@ -1,0 +1,287 @@
+{
+  "id": "42",
+  "href": "http://serverlocation:port/serviceOrdering/v4/serviceOrder/42",
+  "externalId": "BSS747",
+  "priority": "1",
+  "description": "Service order description",
+  "category": "TMF resource illustration",
+  "state": "InProgress",
+  "orderDate": "2020-08-27T09:37:40.508Z",
+  "completionDate": "",
+  "requestedStartDate": "2020-08-31T09:37:40.508Z",
+  "requestedCompletionDate": "2020-08-31T09:37:40.508Z",
+  "expectedCompletionDate": "2020-08-31T09:37:40.508Z",
+  "startDate": "2020-08-31T09:37:40.508Z",
+  "@type": "ServiceOrder",
+  "note": [
+    {
+      "date": "2020-08-27T09:37:40.508Z",
+      "id": "1",
+      "author": "Harvey Poupon",
+      "text": "Some text"
+    }
+  ],
+  "orderRelationship": [
+    {
+      "relationshipType": "dependsOn",
+      "id": "45f-98f-ss45",
+      "href": "https://host:port/serviceOrdering/v4/serviceOrder/45f-98f-ss45",
+      "@referredType": "ServiceOrder"
+    }
+  ],
+  "errorMessage": [
+    {
+      "timestamp": "2020-08-27T09:37:40.508Z",
+      "serviceOrderItem": [
+        {
+          "id": "id",
+          "itemId": "test_1",
+          "serviceOrderId": "42"
+        }
+      ]
+    }
+  ],
+  "relatedParty": [
+    {
+      "id": "456",
+      "href": "http://serverlocation:port/partyManagement/v4/party/456",
+      "role": "requester",
+      "name": "Jean Pontus",
+      "@referredType": "Individual"
+    }
+  ],
+  "jeopardyAlert": [
+    {
+      "id": "144",
+      "alertDate": "2020-08-27T23:17:45.450Z",
+      "exception": "Order Item Completion is in Jeopardy",
+      "jeopardyType": "Raised",
+      "message": "Order Item Completion is in Jeopardy",
+      "name": "Order Item Completion",
+      "serviceOrderItem": [
+        {
+          "id": "id",
+          "itemId": "1",
+          "serviceOrderHref": "http://serverlocation:port/serviceOrdering/v4/serviceOrder/42",
+          "serviceOrderId": "42"
+        }
+      ],
+      "@type": "ServiceOrderJeopardyAlert"
+    }
+  ],
+  "milestone": [
+    {
+      "id": "143",
+      "description": "Port Allocation",
+      "message": "Port Allocation",
+      "milestoneDate": "2020-08-27T23:17:45.450Z",
+      "name": "Port Allocation",
+      "status": "Completed",
+      "serviceOrderItem": [
+        {
+          "id": "id",
+          "itemId": "2",
+          "serviceOrderHref": "http://serverlocation:port/serviceOrdering/v4/serviceOrder/42",
+          "serviceOrderId": "42"
+        }
+      ],
+      "@type": "ServiceOrderMilestone"
+    }
+  ],
+  "externalReference": [
+    {
+      "externalReferenceType": "solution",
+      "name": "IoT"
+    }
+  ],
+  "serviceOrderItem": [
+    {
+      "id": "1",
+      "action": "add",
+      "state": "InProgress",
+      "service": {
+        "@type": "Service",
+        "state": "active",
+        "serviceType": "CFS",
+        "serviceCharacteristic": [
+          {
+            "id": "452-gh6",
+            "name": "vCPE",
+            "valueType": "object",
+            "value": {
+              "@type": "vCPE",
+              "@schemaLocation": "http://nbi/api/v4/serviceSpecification/ONAPvCPE_Spec/specificationInputSchema",
+              "vCPE_IP": "193.218.236.21",
+              "MaxTxRate": 300,
+              "TransmitPower": "11 dBm",
+              "maxTream": "OFF"
+            }
+          }
+        ],
+        "serviceSpecification": {
+          "@type": "ONAPServiceSpecificationRef",
+          "@schemaLocation": "http://my.schema/ONAPServiceSpecificationRef.json",
+          "id": "ONAPvCPE_Spec",
+          "href": "http://../serviceSpecification/ONAPvCPE_Spec",
+          "name": "vCPE",
+          "version": "1",
+          "invariantUUID": "456-852-357",
+          "toscaModelURL": "http//..."
+        }
+      },
+      "errorMessage": [
+        {
+          "code": "500",
+          "message": "Resource Fallout",
+          "reason": "IP address not available",
+          "referenceError": "http://serverlocation:port/serviceOrdering/v4/errorMessage/500",
+          "status": "ERROR-003",
+          "timestamp": "2020-08-27T23:17:45.450Z",
+          "@type": "ServiceOrderItemErrorMessage"
+        }
+      ],
+      "@type": "ServiceOrderItem"
+    },
+    {
+      "id": "2",
+      "action": "modify",
+      "state": "InProgress",
+      "service": {
+        "id": "456",
+        "@type": "Service",
+        "href": "http://serverlocation:port/serviceInventoryManagement/v4/service/456",
+        "state": "active",
+        "serviceType": "CFS",
+        "serviceCharacteristic": [
+          {
+            "id": "452-gh6",
+            "valueType": "string",
+            "name": "InputPort",
+            "value": "456/7"
+          }
+        ],
+        "supportingResource": [
+          {
+            "id": "3456_DFG5-H690",
+            "href": "http://supporting-resource",
+            "@referredType": "CloudResource"
+          }
+        ]
+      },
+      "@type": "ServiceOrderItem"
+    },
+    {
+      "id": "3",
+      "action": "add",
+      "state": "acknowledged",
+      "service": {
+        "state": "active",
+        "serviceType": "CFS",
+        "@type": "Service",
+        "serviceRelationship": [
+          {
+            "relationshipType": "reliesOn",
+            "service": {
+              "href": "https://.../serviceManagement/v4/service/45",
+              "id": "45"
+            },
+            "serviceRelationshipCharacteristic": []
+          }
+        ],
+        "serviceSpecification": {
+          "id": "48",
+          "href": "http//..../48",
+          "name": "genericDataService48",
+          "version": "2"
+        },
+        "feature": [
+          {
+            "id": "Feat1",
+            "isEnabled": true,
+            "name": "DataDownload",
+            "@type": "Feature",
+            "constraint": [
+              {
+                "id": "constraint_1",
+                "name": "constraint_1",
+                "version": "1.0"
+              }
+            ],
+            "featureCharacteristic": [
+              {
+                "name": "VolumeCapped",
+                "id": "444",
+                "value": true,
+                "valueType": "boolean",
+                "characteristicRelationship": [
+                  {
+                    "id": "characteristic_1",
+                    "name": "characteristic_1",
+                    "relationshipType": "relatesTo"
+                  }
+                ]
+              }
+            ],
+            "featureRelationship": [
+              {
+                "id": "relatedFeatureId",
+                "name": "relatedFeatureName",
+                "relationshipType": "dependsOn",
+                "validFor": {
+                  "startDateTime": "2021-07-19T16:01:18.863Z",
+                  "endDateTime": "2025-07-19T16:01:18.863Z"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "@type": "ServiceOrderItem"
+    },
+    {
+      "id": "4",
+      "action": "modify",
+      "state": "acknowledged",
+      "service": {
+        "id": "12",
+        "href": "http://serverlocation:port/serviceInventoryManagement/v4/service/12",
+        "state": "inactive",
+        "place": [
+          {
+            "name": "London",
+            "role": "Official Courts"
+          }
+        ],
+        "serviceOrderItem": [
+          {
+            "serviceOrderId": "id",
+            "itemId": "itemId",
+            "role": "Role",
+            "itemAction": "noChange"
+          }
+        ],
+        "relatedEntity": [
+          {
+            "role": "Parent"
+          }
+        ]
+      },
+      "@type": "ServiceOrderItem",
+      "serviceOrderItemRelationship": [
+        {
+          "relationshipType": "relatesTo",
+          "orderItem": {
+            "serviceOrderId": "42",
+            "itemId": "3",
+            "@referredType": "ReferredType"
+          }
+        }
+      ],
+      "appointment": {
+        "id": "id",
+        "description": "This is an appointment reference with the CEO of Vodafone Global.",
+        "@referredType": "ServiceOrder"
+      }
+    }
+  ]
+}
