@@ -10,10 +10,7 @@
   <artifactId>tmf-622-util</artifactId>
 
   <properties>
-    <maven.compiler.source>17</maven.compiler.source>
-    <maven.compiler.target>17</maven.compiler.target>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <tmf-622-model.version>4.0.0.0</tmf-622-model.version>
+    <tmf-622-model.version>4.0.0.1</tmf-622-model.version>
   </properties>
 
   <dependencies>
@@ -25,7 +22,7 @@
     <dependency>
       <groupId>com.pia.commons</groupId>
       <artifactId>tmf-622-model</artifactId>
-      <version>4.0.0.0</version>
+      <version>${tmf-622-model.version}</version>
     </dependency>
   </dependencies>
 

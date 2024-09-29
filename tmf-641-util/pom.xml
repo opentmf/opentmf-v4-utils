@@ -10,7 +10,7 @@
   <artifactId>tmf-641-util</artifactId>
 
   <properties>
-    <tmf-641-model.version>4.1.0.0</tmf-641-model.version>
+    <tmf-641-model.version>4.1.0.1</tmf-641-model.version>
   </properties>
 
   <dependencies>

@@ -21,3 +21,5 @@ The following utility classes are provided within each module:
 ## Version History
 ### 1.0.0
 - Initial Version
+### 1.0.1
+- Updates to the newest tmf-v4-models versions
