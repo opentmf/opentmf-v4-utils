@@ -7,22 +7,17 @@
     <version>1.0.2-SNAPSHOT</version>
   </parent>
 
-  <artifactId>tmf-622-util</artifactId>
+  <artifactId>tmf-622-v4-util</artifactId>
 
   <properties>
-    <tmf-622-model.version>4.0.0.1</tmf-622-model.version>
+    <tmf-622-v4-model.version>4.0.0.2</tmf-622-v4-model.version>
   </properties>
 
   <dependencies>
     <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>tmf-common-util</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
       <groupId>com.pia.commons</groupId>
-      <artifactId>tmf-622-model</artifactId>
-      <version>${tmf-622-model.version}</version>
+      <artifactId>tmf-622-v4-model</artifactId>
+      <version>${tmf-622-v4-model.version}</version>
     </dependency>
   </dependencies>
 

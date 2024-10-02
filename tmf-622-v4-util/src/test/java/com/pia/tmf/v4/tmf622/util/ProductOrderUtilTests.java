@@ -2,7 +2,6 @@ package com.pia.tmf.v4.tmf622.util;
 
 import static com.pia.commons.util.JacksonUtil.fileToObject;
 import static com.pia.commons.util.ListUtil.safeMutable;
-import static com.pia.tmf.v4.common.util.CharacteristicUtil.getMandatoryCharacteristicStringValue;
 import static com.pia.tmf.v4.tmf622.util.ProductOrderUtil.findProductCharacteristicsBySpecificationId;
 import static com.pia.tmf.v4.tmf622.util.ProductOrderUtil.findProductOrderItemById;
 import static com.pia.tmf.v4.tmf622.util.ProductOrderUtil.isBundle;
@@ -70,9 +69,6 @@ class ProductOrderUtilTests {
 
     assertNotNull(list);
     assertEquals(15, list.size());
-    assertEquals(
-        "demir.gokhan@vodafone.com",
-        getMandatoryCharacteristicStringValue("primaryContactEmail", list));
   }
 
   @Test

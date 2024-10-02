@@ -7,22 +7,17 @@
     <version>1.0.2-SNAPSHOT</version>
   </parent>
 
-  <artifactId>tmf-641-util</artifactId>
+  <artifactId>tmf-641-v4-util</artifactId>
 
   <properties>
-    <tmf-641-model.version>4.1.0.1</tmf-641-model.version>
+    <tmf-641-v4-model.version>4.1.0.2</tmf-641-v4-model.version>
   </properties>
 
   <dependencies>
     <dependency>
-      <groupId>${project.groupId}</groupId>
-      <artifactId>tmf-common-util</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
       <groupId>com.pia.commons</groupId>
-      <artifactId>tmf-641-model</artifactId>
-      <version>${tmf-641-model.version}</version>
+      <artifactId>tmf-641-v4-model</artifactId>
+      <version>${tmf-641-v4-model.version}</version>
     </dependency>
   </dependencies>
 

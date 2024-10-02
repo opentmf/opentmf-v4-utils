@@ -7,17 +7,17 @@
     <version>1.0.2-SNAPSHOT</version>
   </parent>
 
-  <artifactId>tmf-common-util</artifactId>
+  <artifactId>tmf-common-v4-util</artifactId>
 
   <properties>
-    <tmf-common-model.version>4.1.0.1</tmf-common-model.version>
+    <tmf-common-v4-model.version>4.1.0.2</tmf-common-v4-model.version>
   </properties>
 
   <dependencies>
     <dependency>
       <groupId>com.pia.commons</groupId>
-      <artifactId>tmf-common-model</artifactId>
-      <version>${tmf-common-model.version}</version>
+      <artifactId>tmf-common-v4-model</artifactId>
+      <version>${tmf-common-v4-model.version}</version>
     </dependency>
   </dependencies>
 

@@ -6,9 +6,9 @@
   <artifactId>tmf-v4-utils</artifactId>
   <version>1.0.2-SNAPSHOT</version>
   <modules>
-    <module>tmf-622-util</module>
-    <module>tmf-641-util</module>
-    <module>tmf-common-util</module>
+    <module>tmf-622-v4-util</module>
+    <module>tmf-641-v4-util</module>
+    <module>tmf-common-v4-util</module>
   </modules>
   <packaging>pom</packaging>
 
