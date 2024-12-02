@@ -10,7 +10,7 @@
   <artifactId>tmf-622-v4-util</artifactId>
 
   <properties>
-    <tmf-622-v4-model.version>4.0.0.2</tmf-622-v4-model.version>
+    <tmf-622-v4-model.version>4.0.0.3</tmf-622-v4-model.version>
   </properties>
 
   <dependencies>

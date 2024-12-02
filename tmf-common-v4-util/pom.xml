@@ -10,7 +10,7 @@
   <artifactId>tmf-common-v4-util</artifactId>
 
   <properties>
-    <tmf-common-v4-model.version>4.1.0.2</tmf-common-v4-model.version>
+    <tmf-common-v4-model.version>4.1.0.3</tmf-common-v4-model.version>
   </properties>
 
   <dependencies>

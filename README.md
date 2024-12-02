@@ -26,3 +26,5 @@ The following utility classes are provided within each module:
 ### 1.0.2
 - Updates to the newest tmf-v4-models versions
 - Removes tmf-common-v4-util dependencies.
+### 1.0.3
+- Updates to the newest tmf-v4-models versions
