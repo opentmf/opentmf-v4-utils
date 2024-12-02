@@ -4,7 +4,7 @@
   <parent>
     <groupId>com.pia.commons</groupId>
     <artifactId>tmf-v4-utils</artifactId>
-    <version>1.0.3</version>
+    <version>1.0.4-SNAPSHOT</version>
   </parent>
 
   <artifactId>tmf-641-v4-util</artifactId>
