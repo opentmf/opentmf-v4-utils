@@ -62,7 +62,7 @@ class ServiceOrderUtilTests {
   }
 
   @Test
-  void testValidate_withComplexProductTree_throwsException() {
+  void testValidate_withComplexServiceOrderTree_throwsException() {
     var order = getComplexOrder();
     var e = assertThrows(IllegalArgumentException.class, () -> validateOrder(order));
     assertEquals("Very complex service order tree not supported.", e.getMessage());
