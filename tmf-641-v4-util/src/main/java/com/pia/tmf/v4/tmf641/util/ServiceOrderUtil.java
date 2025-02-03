@@ -100,14 +100,13 @@ public class ServiceOrderUtil {
   private static int referencesMeCount(ServiceOrderCreate order, ServiceOrderItem me) {
     var count = 0;
     for (var orderItem : order.getServiceOrderItems()) {
-      if (orderItem != me) {
-        var relList = orderItem.getServiceOrderItemRelationships();
-        if (relList != null) {
-          for (var rel : relList) {
-            if (rel.getOrderItem().getItemId().equals(me.getId())) {
-              count++;
-            }
-          }
+      var relList = orderItem.getServiceOrderItemRelationships();
+      if (orderItem == me || relList == null ) {
+        continue;
+      }
+      for (var rel : relList) {
+        if (rel.getOrderItem().getItemId().equals(me.getId())) {
+          count++;
         }
       }
     }
@@ -130,16 +129,18 @@ public class ServiceOrderUtil {
   private static void validateDependentNodesExist(
       ServiceOrderItem item, Map<String, ServiceOrderItem> orderItemMap) {
     var relList = item.getServiceOrderItemRelationships();
-    if (relList != null) {
-      for (var rel : relList) {
-        var otherItem = orderItemMap.get(rel.getOrderItem().getItemId());
-        if (otherItem == null) {
-          throw new IllegalArgumentException(
-              "Item "
-                  + item.getId()
-                  + " refers to non-existent item "
-                  + rel.getOrderItem().getItemId());
-        }
+    if(relList == null) {
+      return;
+    }
+
+    for (var rel : relList) {
+      var otherItem = orderItemMap.get(rel.getOrderItem().getItemId());
+      if (otherItem == null) {
+        throw new IllegalArgumentException(
+            "Item "
+                + item.getId()
+                + " refers to non-existent item "
+                + rel.getOrderItem().getItemId());
       }
     }
   }
