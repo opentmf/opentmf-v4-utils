@@ -4,7 +4,7 @@
 
   <groupId>com.pia.commons</groupId>
   <artifactId>tmf-v4-utils</artifactId>
-  <version>1.0.4</version>
+  <version>1.0.5-SNAPSHOT</version>
   <modules>
     <module>tmf-622-v4-util</module>
     <module>tmf-641-v4-util</module>
@@ -281,7 +281,7 @@
   <scm>
     <connection>scm:git:git@github.com:pia-commons/tmf-v4-utils.git</connection>
     <developerConnection>scm:git:git@github.com:pia-commons/tmf-v4-utils.git</developerConnection>
-    <tag>tmf-v4-utils-1.0.4</tag>
+    <tag>HEAD</tag>
   </scm>
 
 </project>
