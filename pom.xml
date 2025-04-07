@@ -2,13 +2,13 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>com.pia.commons</groupId>
-  <artifactId>tmf-v4-utils</artifactId>
+  <groupId>org.opentmf.util</groupId>
+  <artifactId>opentmf-v4-utils</artifactId>
   <version>1.0.5-SNAPSHOT</version>
   <modules>
-    <module>tmf-622-v4-util</module>
-    <module>tmf-641-v4-util</module>
-    <module>tmf-common-v4-util</module>
+    <module>opentmf-622-v4-util</module>
+    <module>opentmf-641-v4-util</module>
+    <module>opentmf-common-v4-util</module>
   </modules>
   <packaging>pom</packaging>
 
@@ -19,7 +19,6 @@
     <maven.compiler.target>${java.version}</maven.compiler.target>
 
     <spring-boot.version>3.4.0</spring-boot.version>
-    <pia-commons.version>1.0.0</pia-commons.version>
 
     <jacoco-maven-plugin.version>0.8.12</jacoco-maven-plugin.version>
     <sonar-plugin.version>5.0.0.4389</sonar-plugin.version>

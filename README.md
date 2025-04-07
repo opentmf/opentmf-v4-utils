@@ -30,3 +30,5 @@ The following utility classes are provided within each module:
 - Updates to the newest tmf-v4-models versions
 ### 1.0.4
 - Adds "validateOrder" method to ServiceOrderUtil, with the aim to ensure service order processing will not fail due to missing references and circular dependencies.
+### 1.0.5
+- Initial open-source version
