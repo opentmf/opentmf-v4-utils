@@ -10,7 +10,7 @@
   <artifactId>opentmf-common-v4-util</artifactId>
 
   <properties>
-    <opentmf-common-v4-model.version>4.1.0.4</opentmf-common-v4-model.version>
+    <opentmf-common-v4-model.version>4.1.0.5</opentmf-common-v4-model.version>
   </properties>
 
   <dependencies>
@@ -18,6 +18,10 @@
       <groupId>org.opentmf.model</groupId>
       <artifactId>opentmf-common-v4-model</artifactId>
       <version>${opentmf-common-v4-model.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
     </dependency>
   </dependencies>
 

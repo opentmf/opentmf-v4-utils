@@ -10,7 +10,7 @@
   <artifactId>opentmf-641-v4-util</artifactId>
 
   <properties>
-    <opentmf-641-v4-model.version>4.1.0.4</opentmf-641-v4-model.version>
+    <opentmf-641-v4-model.version>4.1.0.5</opentmf-641-v4-model.version>
   </properties>
 
   <dependencies>

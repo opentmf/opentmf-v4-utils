@@ -10,7 +10,7 @@
   <artifactId>opentmf-622-v4-util</artifactId>
 
   <properties>
-    <opentmf-622-v4-model.version>4.0.0.4</opentmf-622-v4-model.version>
+    <opentmf-622-v4-model.version>4.0.0.5</opentmf-622-v4-model.version>
   </properties>
 
   <dependencies>
