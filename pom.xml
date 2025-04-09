@@ -4,7 +4,7 @@
 
   <groupId>org.opentmf.util</groupId>
   <artifactId>opentmf-v4-utils</artifactId>
-  <version>1.0.5</version>
+  <version>1.0.6-SNAPSHOT</version>
 
   <packaging>pom</packaging>
   <modules>
@@ -343,7 +343,7 @@
     <url>https://github.com/opentmf/opentmf-v4-utils</url>
     <connection>scm:git:git@github.com:opentmf/opentmf-v4-utils.git</connection>
     <developerConnection>scm:git:git@github.com:opentmf/opentmf-v4-utils.git</developerConnection>
-    <tag>opentmf-v4-utils-1.0.5</tag>
+    <tag>HEAD</tag>
   </scm>
 
 </project>
