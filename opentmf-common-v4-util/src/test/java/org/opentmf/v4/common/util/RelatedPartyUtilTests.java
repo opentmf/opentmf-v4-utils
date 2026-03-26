@@ -2,10 +2,9 @@ package org.opentmf.v4.common.util;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.opentmf.v4.common.model.RelatedParty;
 import java.util.Arrays;
 import org.junit.jupiter.api.Test;
-import org.opentmf.v4.common.util.RelatedPartyUtil;
+import org.opentmf.common.model.RelatedParty;
 
 /**
  * @author Gokhan Demir
@@ -19,7 +18,7 @@ class RelatedPartyUtilTests {
     RelatedParty party2 = new RelatedParty();
     party2.setRole("operator");
 
-    RelatedParty result =
+    var result =
         RelatedPartyUtil.findRelatedPartyByRole(Arrays.asList(party1, party2), "customer");
 
     assertEquals(party1, result);
@@ -45,7 +44,7 @@ class RelatedPartyUtilTests {
     RelatedParty party2 = new RelatedParty();
     party2.setRole("operator");
 
-    RelatedParty result =
+    var result =
         RelatedPartyUtil.findUniqueRelatedPartyByRole(Arrays.asList(party1, party2), "customer");
 
     assertEquals(party1, result);
@@ -87,7 +86,7 @@ class RelatedPartyUtilTests {
     party2.setRole("operator");
     party2.setAtReferredType("Organization");
 
-    RelatedParty result = RelatedPartyUtil.findCustomerParty(Arrays.asList(party1, party2));
+    var result = RelatedPartyUtil.findCustomerParty(Arrays.asList(party1, party2));
 
     assertEquals(party1, result);
   }
@@ -115,7 +114,7 @@ class RelatedPartyUtilTests {
     party2.setRole("operator");
     party2.setAtReferredType("Organization");
 
-    RelatedParty result = RelatedPartyUtil.findOperatorParty(Arrays.asList(party1, party2));
+    var result = RelatedPartyUtil.findOperatorParty(Arrays.asList(party1, party2));
 
     assertEquals(party2, result);
   }
@@ -143,7 +142,7 @@ class RelatedPartyUtilTests {
     party2.setRole("supplier");
     party2.setAtReferredType("Organization");
 
-    RelatedParty result = RelatedPartyUtil.findSupplierParty(Arrays.asList(party1, party2));
+    var result = RelatedPartyUtil.findSupplierParty(Arrays.asList(party1, party2));
 
     assertEquals(party2, result);
   }

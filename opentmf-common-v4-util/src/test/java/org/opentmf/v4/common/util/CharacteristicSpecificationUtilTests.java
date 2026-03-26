@@ -4,12 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.opentmf.v4.common.model.CharacteristicSpecificationBase;
-import org.opentmf.v4.common.model.CharacteristicValueSpecification;
 import java.util.Arrays;
 import java.util.Collections;
 import org.junit.jupiter.api.Test;
-import org.opentmf.v4.common.util.CharacteristicSpecificationUtil;
+import org.opentmf.common.model.CharacteristicSpecificationBase;
+import org.opentmf.common.model.CharacteristicValueSpecification;
 
 /**
  * @author Gokhan Demir

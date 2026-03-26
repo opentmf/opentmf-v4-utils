@@ -1,34 +1,81 @@
-# tmf-v4-utils
-This project contains useful utility classes for dealing with TMF v4 model classes.
+# opentmf-v4-utils
 
-The reason this project is a separate project from the tmf-v4-models is, it might have new releases often whereas the model project is nearly static since it is generated from the original swagger files of the relevant TMF APIs.
+Common utility methods for any TMF v4 implementation whose model classes implement
+[opentmf-v4-api](https://github.com/opentmf/opentmf-v4-api) interfaces.
 
-## Provided Utilities
-The following utility classes are provided within each module: 
+Unlike the model and API projects, this is **not generated** — it is hand-written and extended
+on demand as new utility needs arise. Contributions are welcome.
 
-### Common
-- CharacteristicUtil
-- CharacteristicSpecificationUtil
-- NoteUtil
-- RelatedPartyUtil
+Known `opentmf-v4-api` implementations:
 
-### TMF-622
-- ProductOrderUtil
+| Implementation | Scope |
+|---|---|
+| **opentmf-v4-models** | Full artifact set — all TMF v4 modules |
+| **dnext-v4-models** | Partial artifact set |
 
-### TMF-641
-- ServiceOrderUtil
+## Modules
 
-## Version History
-### 1.0.0
-- Initial Version
-### 1.0.1
-- Updates to the newest tmf-v4-models versions
-### 1.0.2
-- Updates to the newest tmf-v4-models versions
-- Removes tmf-common-v4-util dependencies.
-### 1.0.3
-- Updates to the newest tmf-v4-models versions
-### 1.0.4
-- Adds "validateOrder" method to ServiceOrderUtil, with the aim to ensure service order processing will not fail due to missing references and circular dependencies.
-### 1.0.5
-- Initial open-source version
+### opentmf-common-v4-util
+
+#### CharacteristicUtil
+
+Lookup and type-convert characteristics by name from any `Collection<? extends ICharacteristic>`.
+
+| Method | Description |
+|---|---|
+| `findCharacteristicByName` | Find a characteristic by name, returning `Optional` |
+| `getMandatoryCharacteristic` | Get a characteristic by name or throw |
+| `getOptionalCharacteristic*Value` | Get optional value as String, Boolean, Integer, Long, or OffsetDateTime |
+| `getMandatoryCharacteristic*Value` | Get mandatory value as String, Boolean, Integer, Long, or OffsetDateTime |
+| `toNameObjectMap` / `toNameStringMap` | Convert a characteristic collection to a `Map` |
+| `detectDuplicates` | Detect duplicate characteristic names |
+
+#### CharacteristicSpecificationUtil
+
+| Method | Description |
+|---|---|
+| `isMandatory` | Check if a specification has min = max cardinality = 1 |
+| `allowedValues` | Extract allowed values from value specifications |
+
+#### NoteUtil
+
+| Method | Description |
+|---|---|
+| `noteListContainsText` | Check if any note in the collection contains a given text |
+
+#### RelatedPartyUtil
+
+Lookup related parties by role and/or referred type.
+
+| Method | Description |
+|---|---|
+| `findRelatedPartyByRole` | Find first party by role or throw |
+| `findOptionalRelatedPartyByRole` | Find first party by role, returning `Optional` |
+| `findUniqueRelatedPartyByRole` | Find exactly one party by role or throw |
+| `findCustomerParty` | Shorthand: referred type "Customer", role "customer" |
+| `findOperatorParty` | Shorthand: referred type "Organization", role "operator" |
+| `findSupplierParty` | Shorthand: referred type "Organization", role "supplier" |
+
+### opentmf-622-v4-util
+
+#### ProductOrderUtil
+
+| Method | Description |
+|---|---|
+| `findProductOrderItemById` | Find an order item by id or throw |
+| `findProductCharacteristicsBySpecificationId` | Get characteristics of the product matching a specification id |
+| `isBundle` | Check if an order item has a "bundles" relationship |
+| `validateOrder` | Validate the order graph: start/end nodes exist, all references resolve, no circular dependencies |
+
+### opentmf-641-v4-util
+
+#### ServiceOrderUtil
+
+| Method | Description |
+|---|---|
+| `findServiceOrderItemById` | Find an order item by id or throw |
+| `validateOrder` | Validate the order graph: start/end nodes exist, all references resolve, no circular dependencies |
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md).

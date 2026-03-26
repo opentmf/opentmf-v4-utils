@@ -1,16 +1,15 @@
 package org.opentmf.v4.common.util;
 
-import static org.opentmf.v4.common.util.CharacteristicUtil.*;
 import static java.util.Collections.emptyList;
 import static org.junit.jupiter.api.Assertions.*;
+import static org.opentmf.v4.common.util.CharacteristicUtil.*;
 
-import org.opentmf.v4.common.model.Characteristic;
-import org.opentmf.v4.common.model.RelatedParty;
 import java.time.OffsetDateTime;
 import java.util.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.opentmf.v4.common.util.CharacteristicUtil;
+import org.opentmf.common.model.Characteristic;
+import org.opentmf.common.model.RelatedParty;
 
 /**
  * @author Gokhan Demir
@@ -327,7 +326,7 @@ class CharacteristicUtilTests {
 
   @Test
   void test_findCharacteristicByName() {
-    Characteristic result = CharacteristicUtil.findCharacteristicByName("char2", characteristics)
+    var result = CharacteristicUtil.findCharacteristicByName("char2", characteristics)
         .orElse(null);
     assertNotNull(result);
     assertEquals("char2", result.getName());

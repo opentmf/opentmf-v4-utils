@@ -1,10 +1,10 @@
 package org.opentmf.v4.tmf622.util;
 
-import org.opentmf.v4.common.model.Characteristic;
-import org.opentmf.v4.product.model.ProductRefOrValue;
-import org.opentmf.v4.tmf622.model.OrderItemRelationship;
-import org.opentmf.v4.tmf622.model.ProductOrderCreate;
-import org.opentmf.v4.tmf622.model.ProductOrderItem;
+import org.opentmf.common.model.ICharacteristic;
+import org.opentmf.common.model.IProductRefOrValue;
+import org.opentmf.tmf622.model.IOrderItemRelationship;
+import org.opentmf.tmf622.model.IProductOrderCreate;
+import org.opentmf.tmf622.model.IProductOrderItem;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -40,8 +40,8 @@ public final class ProductOrderUtil {
    * @throws IllegalArgumentException If the Product Order item with the given ID is not found in
    *     the list.
    */
-  public static ProductOrderItem findProductOrderItemById(
-      ProductOrderCreate productOrder, String id) {
+  public static IProductOrderItem findProductOrderItemById(
+      IProductOrderCreate productOrder, String id) {
     return productOrder.getProductOrderItems().stream()
         .filter(productOrderItem -> id.equals(productOrderItem.getId()))
         .findFirst()
@@ -59,24 +59,31 @@ public final class ProductOrderUtil {
    * @param productSpecificationId the product specification id to match.
    * @return the characteristics of the first matching product.
    */
-  public static List<Characteristic> findProductCharacteristicsBySpecificationId(
-      ProductOrderCreate productOrder, String productSpecificationId) {
+  public static List<? extends ICharacteristic> findProductCharacteristicsBySpecificationId(
+      IProductOrderCreate productOrder, String productSpecificationId) {
     return productOrder.getProductOrderItems().stream()
-        .map(ProductOrderItem::getProduct)
+        .map(IProductOrderItem::getProduct)
         .filter(Objects::nonNull)
         .filter(product -> productSpecificationMatchesId(product, productSpecificationId))
-        .map(ProductRefOrValue::getProductCharacteristics)
+        .map(IProductRefOrValue::getProductCharacteristics)
         .findFirst()
         .orElse(Collections.emptyList());
   }
 
   private static boolean productSpecificationMatchesId(
-      ProductRefOrValue product, String productSpecificationId) {
+      IProductRefOrValue product, String productSpecificationId) {
     return Objects.nonNull(product.getProductSpecification())
         && productSpecificationId.equals(product.getProductSpecification().getId());
   }
 
-  public static boolean isBundle(ProductOrderItem item) {
+  /**
+   * Checks whether the given product order item is a bundle, i.e. it has at least one
+   * relationship of type "bundles".
+   *
+   * @param item The product order item to check.
+   * @return {@code true} if the item is a bundle, {@code false} otherwise.
+   */
+  public static boolean isBundle(IProductOrderItem item) {
     if (item.getProductOrderItemRelationships() != null) {
       return item.getProductOrderItemRelationships().stream()
           .anyMatch(relationship -> BUNDLES.equals(relationship.getRelationshipType()));
@@ -98,7 +105,7 @@ public final class ProductOrderUtil {
    *
    * @param order The productOrderCreate payload.
    */
-  public static void validateOrder(ProductOrderCreate order) {
+  public static void validateOrder(IProductOrderCreate order) {
     validateFlowCanStart(order);
     validateFlowCanEnd(order);
     validateAllDependentNodesExist(order);
@@ -108,8 +115,8 @@ public final class ProductOrderUtil {
   private static final int MAX_ITERATION = 100000;
 
   private static void addDeepDependencies(
-      ProductOrderCreate order,
-      ProductOrderItem item,
+      IProductOrderCreate order,
+      IProductOrderItem item,
       Set<String> deepDependencySet,
       Set<String> alreadyTraversed,
       int iterationCount) {
@@ -120,7 +127,7 @@ public final class ProductOrderUtil {
       }
       var relList = item.getProductOrderItemRelationships();
       if (relList != null) {
-        for (OrderItemRelationship rel : relList) {
+        for (IOrderItemRelationship rel : relList) {
           deepDependencySet.add(rel.getId());
           addDeepDependencies(
               order,
@@ -133,14 +140,16 @@ public final class ProductOrderUtil {
     }
   }
 
-  private static Set<String> deepDependencies(ProductOrderCreate order, ProductOrderItem item) {
+  private static Set<String> deepDependencies(
+      IProductOrderCreate order, IProductOrderItem item) {
     var deepDependencySet = new HashSet<String>();
     var alreadyTraversedIds = new HashSet<String>();
     addDeepDependencies(order, item, deepDependencySet, alreadyTraversedIds, 0);
     return deepDependencySet;
   }
 
-  private static void validateCircularDependency(ProductOrderCreate order, ProductOrderItem item) {
+  private static void validateCircularDependency(
+      IProductOrderCreate order, IProductOrderItem item) {
     var deepDependencySet = deepDependencies(order, item);
     if (deepDependencySet.contains(item.getId())) {
       throw new IllegalArgumentException(
@@ -148,7 +157,7 @@ public final class ProductOrderUtil {
     }
   }
 
-  private static void validateCircularDependencies(ProductOrderCreate order) {
+  private static void validateCircularDependencies(IProductOrderCreate order) {
     order.getProductOrderItems().forEach(item -> validateCircularDependency(order, item));
   }
 
@@ -157,7 +166,7 @@ public final class ProductOrderUtil {
    *
    * @param order Product order to validate.
    */
-  private static void validateFlowCanStart(ProductOrderCreate order) {
+  private static void validateFlowCanStart(IProductOrderCreate order) {
     for (var item : order.getProductOrderItems()) {
       if (referenceCount(item) == 0) {
         return;
@@ -166,12 +175,12 @@ public final class ProductOrderUtil {
     throw new IllegalArgumentException("No independent start node exists.");
   }
 
-  private static int referenceCount(ProductOrderItem me) {
+  private static int referenceCount(IProductOrderItem me) {
     var relList = me.getProductOrderItemRelationships();
     return relList == null ? 0 : relList.size();
   }
 
-  private static int referencesMeCount(ProductOrderCreate order, ProductOrderItem me) {
+  private static int referencesMeCount(IProductOrderCreate order, IProductOrderItem me) {
     var count = 0;
     for (var orderItem : order.getProductOrderItems()) {
       if (orderItem != me) {
@@ -194,7 +203,7 @@ public final class ProductOrderUtil {
    *
    * @param order The product order to validate.
    */
-  private static void validateFlowCanEnd(ProductOrderCreate order) {
+  private static void validateFlowCanEnd(IProductOrderCreate order) {
     for (var item : order.getProductOrderItems()) {
       var referencesMeCount = referencesMeCount(order, item);
       if (referencesMeCount == 0) {
@@ -205,7 +214,7 @@ public final class ProductOrderUtil {
   }
 
   private static void validateDependentNodesExist(
-      ProductOrderItem item, Map<String, ProductOrderItem> orderItemMap) {
+      IProductOrderItem item, Map<String, IProductOrderItem> orderItemMap) {
     var relList = item.getProductOrderItemRelationships();
     if (relList != null) {
       for (var rel : relList) {
@@ -218,15 +227,15 @@ public final class ProductOrderUtil {
     }
   }
 
-  private static Map<String, ProductOrderItem> orderItemMap(ProductOrderCreate order) {
-    var map = new HashMap<String, ProductOrderItem>();
+  private static Map<String, IProductOrderItem> orderItemMap(IProductOrderCreate order) {
+    var map = new HashMap<String, IProductOrderItem>();
     for (var item : order.getProductOrderItems()) {
       map.put(item.getId(), item);
     }
     return map;
   }
 
-  private static void validateAllDependentNodesExist(ProductOrderCreate order) {
+  private static void validateAllDependentNodesExist(IProductOrderCreate order) {
     var map = orderItemMap(order);
     order.getProductOrderItems().forEach(item -> validateDependentNodesExist(item, map));
   }

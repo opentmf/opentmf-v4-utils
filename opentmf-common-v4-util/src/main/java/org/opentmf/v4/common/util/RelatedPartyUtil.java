@@ -1,6 +1,6 @@
 package org.opentmf.v4.common.util;
 
-import org.opentmf.v4.common.model.RelatedParty;
+import org.opentmf.common.model.IRelatedParty;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Optional;
@@ -38,8 +38,8 @@ public class RelatedPartyUtil {
    * @throws IllegalArgumentException If no relatedParty with the requested role exists in the
    *     collection.
    */
-  public static RelatedParty findRelatedPartyByRole(
-      Collection<RelatedParty> relatedParties, String role) {
+  public static IRelatedParty findRelatedPartyByRole(
+      Collection<? extends IRelatedParty> relatedParties, String role) {
     return findOptionalRelatedPartyByRole(relatedParties, role)
         .orElseThrow(
             () -> new IllegalArgumentException("RelatedParty with role = " + role + NOT_FOUND));
@@ -53,17 +53,20 @@ public class RelatedPartyUtil {
    * @return The first found relatedParty that matches the requested role in the related party
    *     collection or optional empty.
    */
-  public static Optional<RelatedParty> findOptionalRelatedPartyByRole(
-      Collection<RelatedParty> relatedParties, String role) {
-    return relatedParties.stream()
-        .filter(relatedParty -> role.equalsIgnoreCase(relatedParty.getRole()))
-        .findFirst();
+  public static Optional<IRelatedParty> findOptionalRelatedPartyByRole(
+      Collection<? extends IRelatedParty> relatedParties, String role) {
+    for (IRelatedParty relatedParty : relatedParties) {
+      if (role.equalsIgnoreCase(relatedParty.getRole())) {
+        return Optional.of(relatedParty);
+      }
+    }
+    return Optional.empty();
   }
 
-  private static Collection<RelatedParty> findAllRelatedPartiesByRole(
-      Collection<RelatedParty> relatedPartyList, String role) {
-    Collection<RelatedParty> list = new ArrayList<>();
-    for (RelatedParty relatedParty : relatedPartyList) {
+  private static Collection<IRelatedParty> findAllRelatedPartiesByRole(
+      Collection<? extends IRelatedParty> relatedPartyList, String role) {
+    Collection<IRelatedParty> list = new ArrayList<>();
+    for (IRelatedParty relatedParty : relatedPartyList) {
       if (role.equalsIgnoreCase(relatedParty.getRole())) {
         list.add(relatedParty);
       }
@@ -78,8 +81,8 @@ public class RelatedPartyUtil {
    * @param role The requested role to detect uniqueness.
    * @return the unique related party by the specified role.
    */
-  public static RelatedParty findUniqueRelatedPartyByRole(
-      Collection<RelatedParty> relatedParties, String role) {
+  public static IRelatedParty findUniqueRelatedPartyByRole(
+      Collection<? extends IRelatedParty> relatedParties, String role) {
     var allPartiesWithRole = findAllRelatedPartiesByRole(relatedParties, role);
     if (allPartiesWithRole.isEmpty()) {
       throw new IllegalArgumentException("RelatedParty with role=" + role + NOT_FOUND);
@@ -94,25 +97,49 @@ public class RelatedPartyUtil {
     return allPartiesWithRole.iterator().next();
   }
 
-  private static RelatedParty findRelatedPartyByReferredTypeAndRole(
-      Collection<RelatedParty> relatedParties, String referredType, String role) {
+  private static IRelatedParty findRelatedPartyByReferredTypeAndRole(
+      Collection<? extends IRelatedParty> relatedParties, String referredType, String role) {
     return relatedParties.stream()
         .filter(relatedParty -> referredType.equals(relatedParty.getAtReferredType()))
         .filter(relatedParty -> role.equalsIgnoreCase(relatedParty.getRole()))
         .findFirst()
-        .orElseThrow(() -> new IllegalArgumentException("RelatedParty of referredType = " 
+        .orElseThrow(() -> new IllegalArgumentException("RelatedParty of referredType = "
             + referredType + " and role = " + role + NOT_FOUND));
   }
 
-  public static RelatedParty findCustomerParty(Collection<RelatedParty> relatedParties) {
+  /**
+   * Finds the related party with referred type "Customer" and role "customer".
+   *
+   * @param relatedParties The collection of related parties.
+   * @return The customer party.
+   * @throws IllegalArgumentException If no matching related party is found.
+   */
+  public static IRelatedParty findCustomerParty(
+      Collection<? extends IRelatedParty> relatedParties) {
     return findRelatedPartyByReferredTypeAndRole(relatedParties, CUSTOMER_TYPE, CUSTOMER_ROLE);
   }
 
-  public static RelatedParty findOperatorParty(Collection<RelatedParty> relatedParties) {
+  /**
+   * Finds the related party with referred type "Organization" and role "operator".
+   *
+   * @param relatedParties The collection of related parties.
+   * @return The operator party.
+   * @throws IllegalArgumentException If no matching related party is found.
+   */
+  public static IRelatedParty findOperatorParty(
+      Collection<? extends IRelatedParty> relatedParties) {
     return findRelatedPartyByReferredTypeAndRole(relatedParties, ORGANIZATION_TYPE, OPERATOR_ROLE);
   }
 
-  public static RelatedParty findSupplierParty(Collection<RelatedParty> relatedParties) {
+  /**
+   * Finds the related party with referred type "Organization" and role "supplier".
+   *
+   * @param relatedParties The collection of related parties.
+   * @return The supplier party.
+   * @throws IllegalArgumentException If no matching related party is found.
+   */
+  public static IRelatedParty findSupplierParty(
+      Collection<? extends IRelatedParty> relatedParties) {
     return findRelatedPartyByReferredTypeAndRole(relatedParties, ORGANIZATION_TYPE, SUPPLIER_ROLE);
   }
 }

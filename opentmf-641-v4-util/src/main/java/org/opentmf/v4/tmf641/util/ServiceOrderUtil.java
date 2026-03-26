@@ -1,9 +1,9 @@
 package org.opentmf.v4.tmf641.util;
 
-import org.opentmf.v4.tmf641.model.ServiceOrder;
-import org.opentmf.v4.tmf641.model.ServiceOrderCreate;
-import org.opentmf.v4.tmf641.model.ServiceOrderItem;
-import org.opentmf.v4.tmf641.model.ServiceOrderItemRelationship;
+import org.opentmf.tmf641.model.IServiceOrder;
+import org.opentmf.tmf641.model.IServiceOrderCreate;
+import org.opentmf.tmf641.model.IServiceOrderItem;
+import org.opentmf.tmf641.model.IServiceOrderItemRelationship;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -31,7 +31,7 @@ public class ServiceOrderUtil {
    * @throws IllegalArgumentException If the Service Order item with the given ID is not found in
    *     the list.
    */
-  public static ServiceOrderItem findServiceOrderItemById(ServiceOrder serviceOrder, String id) {
+  public static IServiceOrderItem findServiceOrderItemById(IServiceOrder serviceOrder, String id) {
     return serviceOrder.getServiceOrderItems().stream()
         .filter(serviceOrderItem -> id.equals(serviceOrderItem.getId()))
         .findFirst()
@@ -55,7 +55,7 @@ public class ServiceOrderUtil {
    *
    * @param order The ServiceOrderCreate payload.
    */
-  public static void validateOrder(ServiceOrderCreate order) {
+  public static void validateOrder(IServiceOrderCreate order) {
     validateFlowCanStart(order);
     validateFlowCanEnd(order);
     validateAllDependentNodesExist(order);
@@ -67,7 +67,7 @@ public class ServiceOrderUtil {
    *
    * @param order Service order to validate.
    */
-  private static void validateFlowCanStart(ServiceOrderCreate order) {
+  private static void validateFlowCanStart(IServiceOrderCreate order) {
     for (var item : order.getServiceOrderItems()) {
       if (referenceCount(item) == 0) {
         return;
@@ -76,7 +76,7 @@ public class ServiceOrderUtil {
     throw new IllegalArgumentException("No independent start node exists.");
   }
 
-  private static int referenceCount(ServiceOrderItem me) {
+  private static int referenceCount(IServiceOrderItem me) {
     var relList = me.getServiceOrderItemRelationships();
     return relList == null ? 0 : relList.size();
   }
@@ -87,7 +87,7 @@ public class ServiceOrderUtil {
    *
    * @param order The service order to validate.
    */
-  private static void validateFlowCanEnd(ServiceOrderCreate order) {
+  private static void validateFlowCanEnd(IServiceOrderCreate order) {
     for (var item : order.getServiceOrderItems()) {
       var referencesMeCount = referencesMeCount(order, item);
       if (referencesMeCount == 0) {
@@ -97,7 +97,7 @@ public class ServiceOrderUtil {
     throw new IllegalArgumentException("No end node exists for the Service Order Flow.");
   }
 
-  private static int referencesMeCount(ServiceOrderCreate order, ServiceOrderItem me) {
+  private static int referencesMeCount(IServiceOrderCreate order, IServiceOrderItem me) {
     var count = 0;
     for (var orderItem : order.getServiceOrderItems()) {
       var relList = orderItem.getServiceOrderItemRelationships();
@@ -113,13 +113,13 @@ public class ServiceOrderUtil {
     return count;
   }
 
-  private static void validateAllDependentNodesExist(ServiceOrderCreate order) {
+  private static void validateAllDependentNodesExist(IServiceOrderCreate order) {
     var map = orderItemMap(order);
     order.getServiceOrderItems().forEach(item -> validateDependentNodesExist(item, map));
   }
 
-  private static Map<String, ServiceOrderItem> orderItemMap(ServiceOrderCreate order) {
-    var map = new HashMap<String, ServiceOrderItem>();
+  private static Map<String, IServiceOrderItem> orderItemMap(IServiceOrderCreate order) {
+    var map = new HashMap<String, IServiceOrderItem>();
     for (var item : order.getServiceOrderItems()) {
       map.put(item.getId(), item);
     }
@@ -127,7 +127,7 @@ public class ServiceOrderUtil {
   }
 
   private static void validateDependentNodesExist(
-      ServiceOrderItem item, Map<String, ServiceOrderItem> orderItemMap) {
+      IServiceOrderItem item, Map<String, IServiceOrderItem> orderItemMap) {
     var relList = item.getServiceOrderItemRelationships();
     if(relList == null) {
       return;
@@ -145,11 +145,12 @@ public class ServiceOrderUtil {
     }
   }
 
-  private static void validateCircularDependencies(ServiceOrderCreate order) {
+  private static void validateCircularDependencies(IServiceOrderCreate order) {
     order.getServiceOrderItems().forEach(item -> validateCircularDependency(order, item));
   }
 
-  private static void validateCircularDependency(ServiceOrderCreate order, ServiceOrderItem item) {
+  private static void validateCircularDependency(
+      IServiceOrderCreate order, IServiceOrderItem item) {
     var deepDependencySet = deepDependencies(order, item);
     if (deepDependencySet.contains(item.getId())) {
       throw new IllegalArgumentException(
@@ -157,7 +158,8 @@ public class ServiceOrderUtil {
     }
   }
 
-  private static Set<String> deepDependencies(ServiceOrderCreate order, ServiceOrderItem item) {
+  private static Set<String> deepDependencies(
+      IServiceOrderCreate order, IServiceOrderItem item) {
     var deepDependencySet = new HashSet<String>();
     var alreadyTraversedIds = new HashSet<String>();
     addDeepDependencies(order, item, deepDependencySet, alreadyTraversedIds, 0);
@@ -165,8 +167,8 @@ public class ServiceOrderUtil {
   }
 
   private static void addDeepDependencies(
-      ServiceOrderCreate order,
-      ServiceOrderItem item,
+      IServiceOrderCreate order,
+      IServiceOrderItem item,
       Set<String> deepDependencySet,
       Set<String> alreadyTraversedSet,
       int iterationCount) {
@@ -183,7 +185,7 @@ public class ServiceOrderUtil {
     if(relList == null) {
       return;
     }
-    for (ServiceOrderItemRelationship rel : relList) {
+    for (IServiceOrderItemRelationship rel : relList) {
       deepDependencySet.add(rel.getOrderItem().getItemId());
       addDeepDependencies(
           order,

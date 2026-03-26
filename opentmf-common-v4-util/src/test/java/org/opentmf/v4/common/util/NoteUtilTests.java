@@ -2,11 +2,10 @@ package org.opentmf.v4.common.util;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.opentmf.v4.common.model.Note;
 import java.util.Arrays;
 import java.util.Collections;
 import org.junit.jupiter.api.Test;
-import org.opentmf.v4.common.util.NoteUtil;
+import org.opentmf.common.model.Note;
 
 /**
  * @author Gokhan Demir

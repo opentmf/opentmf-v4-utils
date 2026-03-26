@@ -4,7 +4,7 @@ import static org.apache.commons.lang3.BooleanUtils.toBooleanObject;
 import static org.apache.commons.lang3.math.NumberUtils.toInt;
 import static org.apache.commons.lang3.math.NumberUtils.toLong;
 
-import org.opentmf.v4.common.model.Characteristic;
+import org.opentmf.common.model.ICharacteristic;
 import java.text.MessageFormat;
 import java.text.ParseException;
 import java.time.OffsetDateTime;
@@ -41,9 +41,9 @@ public final class CharacteristicUtil {
    * @return the optional characteristic's value as an object, or null if it does not exist.
    */
   public static Object getOptionalCharacteristicValue(
-      String name, Collection<Characteristic> characteristics) {
+      String name, Collection<? extends ICharacteristic> characteristics) {
     return findCharacteristicByName(name, characteristics)
-        .map(Characteristic::getValue)
+        .map(ICharacteristic::getValue)
         .orElse(null);
   }
 
@@ -57,35 +57,63 @@ public final class CharacteristicUtil {
    *     exist.
    */
   public static String getOptionalCharacteristicStringValue(
-      String name, Collection<Characteristic> characteristics) {
+      String name, Collection<? extends ICharacteristic> characteristics) {
     return findCharacteristicByName(name, characteristics)
         .map(CharacteristicUtil::getStringValue)
         .orElse(null);
   }
 
+  /**
+   * Returns the optional characteristic's boolean value, or null if it does not exist.
+   *
+   * @param name The characteristic name.
+   * @param characteristics The collection that holds characteristics.
+   * @return The boolean value, or null if the characteristic does not exist.
+   */
   public static Boolean getOptionalCharacteristicBooleanValue(
-      String name, Collection<Characteristic> characteristics) {
+      String name, Collection<? extends ICharacteristic> characteristics) {
     return findCharacteristicByName(name, characteristics)
         .map(CharacteristicUtil::getBooleanValue)
         .orElse(null);
   }
 
+  /**
+   * Returns the optional characteristic's integer value, or null if it does not exist.
+   *
+   * @param name The characteristic name.
+   * @param characteristics The collection that holds characteristics.
+   * @return The integer value, or null if the characteristic does not exist.
+   */
   public static Integer getOptionalCharacteristicIntegerValue(
-      String name, Collection<Characteristic> characteristics) {
+      String name, Collection<? extends ICharacteristic> characteristics) {
     return findCharacteristicByName(name, characteristics)
         .map(CharacteristicUtil::getIntegerValue)
         .orElse(null);
   }
 
+  /**
+   * Returns the optional characteristic's long value, or null if it does not exist.
+   *
+   * @param name The characteristic name.
+   * @param characteristics The collection that holds characteristics.
+   * @return The long value, or null if the characteristic does not exist.
+   */
   public static Long getOptionalCharacteristicLongValue(
-      String name, Collection<Characteristic> characteristics) {
+      String name, Collection<? extends ICharacteristic> characteristics) {
     return findCharacteristicByName(name, characteristics)
         .map(CharacteristicUtil::getLongValue)
         .orElse(null);
   }
 
+  /**
+   * Returns the optional characteristic's date-time value, or null if it does not exist.
+   *
+   * @param name The characteristic name.
+   * @param characteristics The collection that holds characteristics.
+   * @return The date-time value as OffsetDateTime, or null if the characteristic does not exist.
+   */
   public static OffsetDateTime getOptionalCharacteristicOffsetDateTimeValue(
-      String name, Collection<Characteristic> characteristics) {
+      String name, Collection<? extends ICharacteristic> characteristics) {
     return findCharacteristicByName(name, characteristics)
         .map(CharacteristicUtil::getOffsetDateTimeValue)
         .orElse(null);
@@ -100,8 +128,8 @@ public final class CharacteristicUtil {
    * @throws IllegalArgumentException If the mandatory characteristic is not found in the
    *     collection.
    */
-  public static Characteristic getMandatoryCharacteristic(
-      String name, Collection<Characteristic> characteristics) {
+  public static ICharacteristic getMandatoryCharacteristic(
+      String name, Collection<? extends ICharacteristic> characteristics) {
     return findCharacteristicByName(name, characteristics)
         .orElseThrow(() -> mandatoryCharacteristicNotFound(name));
   }
@@ -116,7 +144,7 @@ public final class CharacteristicUtil {
    *     collection.
    */
   public static Object getMandatoryCharacteristicValue(
-      String name, Collection<Characteristic> characteristics) {
+      String name, Collection<? extends ICharacteristic> characteristics) {
     return getMandatoryCharacteristic(name, characteristics).getValue();
   }
 
@@ -141,7 +169,7 @@ public final class CharacteristicUtil {
    *     collection, or it cannot be parsed using neither of the above formats.
    */
   public static OffsetDateTime getMandatoryCharacteristicOffsetDateTimeValue(
-      String name, Collection<Characteristic> characteristics) {
+      String name, Collection<? extends ICharacteristic> characteristics) {
     return getOffsetDateTimeValue(getMandatoryCharacteristic(name, characteristics));
   }
 
@@ -156,7 +184,7 @@ public final class CharacteristicUtil {
    *     collection.
    */
   public static String getMandatoryCharacteristicStringValue(
-      String name, Collection<Characteristic> characteristics) {
+      String name, Collection<? extends ICharacteristic> characteristics) {
     return getStringValue(getMandatoryCharacteristic(name, characteristics));
   }
 
@@ -167,26 +195,51 @@ public final class CharacteristicUtil {
    * @return the string value of the existing characteristic or null.
    * @throws NullPointerException If the characteristic itself is null.
    */
-  public static String getStringValue(final Characteristic characteristic) {
+  public static String getStringValue(final ICharacteristic characteristic) {
     return characteristic.getValue() == null ? null : String.valueOf(characteristic.getValue());
   }
 
-  public static Boolean getBooleanValue(final Characteristic characteristic) {
+  /**
+   * Returns the boolean value of the given characteristic.
+   *
+   * @param characteristic The characteristic.
+   * @return The boolean value, or null if the characteristic's value is null.
+   */
+  public static Boolean getBooleanValue(final ICharacteristic characteristic) {
     String stringValue = getStringValue(characteristic);
     return stringValue == null ? null : toBooleanObject(stringValue);
   }
 
-  public static Integer getIntegerValue(final Characteristic characteristic) {
+  /**
+   * Returns the integer value of the given characteristic.
+   *
+   * @param characteristic The characteristic.
+   * @return The integer value, or null if the characteristic's value is null.
+   */
+  public static Integer getIntegerValue(final ICharacteristic characteristic) {
     String stringValue = getStringValue(characteristic);
     return stringValue == null ? null : toInt(stringValue);
   }
 
-  public static Long getLongValue(final Characteristic characteristic) {
+  /**
+   * Returns the long value of the given characteristic.
+   *
+   * @param characteristic The characteristic.
+   * @return The long value, or null if the characteristic's value is null.
+   */
+  public static Long getLongValue(final ICharacteristic characteristic) {
     String stringValue = getStringValue(characteristic);
     return stringValue == null ? null : toLong(stringValue);
   }
 
-  public static OffsetDateTime getOffsetDateTimeValue(final Characteristic characteristic) {
+  /**
+   * Parses the characteristic's string value as a date-time using several common formats.
+   *
+   * @param characteristic The characteristic.
+   * @return The parsed OffsetDateTime, or null if the characteristic's value is null.
+   * @throws IllegalArgumentException If the value cannot be parsed.
+   */
+  public static OffsetDateTime getOffsetDateTimeValue(final ICharacteristic characteristic) {
     var dateStr = getStringValue(characteristic);
     if (dateStr == null) {
       return null;
@@ -223,7 +276,7 @@ public final class CharacteristicUtil {
    *     or if the value cannot be converted to an integer.
    */
   public static Integer getMandatoryCharacteristicIntegerValue(
-      String name, Collection<Characteristic> collection) {
+      String name, Collection<? extends ICharacteristic> collection) {
     return getIntegerValue(getMandatoryCharacteristic(name, collection));
   }
 
@@ -238,7 +291,7 @@ public final class CharacteristicUtil {
    *     or if the value cannot be converted to an integer.
    */
   public static Long getMandatoryCharacteristicLongValue(
-      String name, Collection<Characteristic> characteristics) {
+      String name, Collection<? extends ICharacteristic> characteristics) {
     return getLongValue(getMandatoryCharacteristic(name, characteristics));
   }
 
@@ -253,7 +306,7 @@ public final class CharacteristicUtil {
    *     or if the value cannot be converted to a boolean.
    */
   public static Boolean getMandatoryCharacteristicBooleanValue(
-      String name, Collection<Characteristic> characteristics) {
+      String name, Collection<? extends ICharacteristic> characteristics) {
     return getBooleanValue(getMandatoryCharacteristic(name, characteristics));
   }
 
@@ -264,10 +317,10 @@ public final class CharacteristicUtil {
    * @param characteristics The collection of characteristics to search within.
    * @return An Optional containing the found characteristic, or an empty Optional if not found.
    */
-  public static Optional<Characteristic> findCharacteristicByName(
-      String name, Collection<Characteristic> characteristics) {
+  public static Optional<ICharacteristic> findCharacteristicByName(
+      String name, Collection<? extends ICharacteristic> characteristics) {
     if (characteristics != null && !characteristics.isEmpty()) {
-      for (Characteristic c : characteristics) {
+      for (ICharacteristic c : characteristics) {
         if (c.getName().equals(name)) {
           return Optional.of(c);
         }
@@ -282,11 +335,12 @@ public final class CharacteristicUtil {
    * @param characteristics The characteristic collection to map.
    * @return The map of the characteristic names and their values as an object.
    */
-  public static Map<String, Object> toNameObjectMap(Collection<Characteristic> characteristics) {
+  public static Map<String, Object> toNameObjectMap(
+      Collection<? extends ICharacteristic> characteristics) {
     return characteristics.stream()
         .collect(
             Collectors.toMap(
-                Characteristic::getName, Characteristic::getValue, (a, b) -> b, HashMap::new));
+                ICharacteristic::getName, ICharacteristic::getValue, (a, b) -> b, HashMap::new));
   }
 
   /**
@@ -295,11 +349,12 @@ public final class CharacteristicUtil {
    * @param characteristics The characteristic collection to map.
    * @return The map of the characteristic names and their values as a string.
    */
-  public static Map<String, String> toNameStringMap(Collection<Characteristic> characteristics) {
+  public static Map<String, String> toNameStringMap(
+      Collection<? extends ICharacteristic> characteristics) {
     return characteristics.stream()
         .collect(
             Collectors.toMap(
-                Characteristic::getName,
+                ICharacteristic::getName,
                 c -> emptyINull(CharacteristicUtil.getStringValue(c)),
                 (a, b) -> b,
                 HashMap::new));
@@ -323,7 +378,8 @@ public final class CharacteristicUtil {
    * @param characteristics the collection to be inspected for duplicate characteristic names.
    * @return A map of name - count pairs for the detected duplicate characteristic names.
    */
-  public static Map<String, Integer> detectDuplicates(Collection<Characteristic> characteristics) {
+  public static Map<String, Integer> detectDuplicates(
+      Collection<? extends ICharacteristic> characteristics) {
     var temp = new HashMap<String, Integer>();
     for (var characteristic : characteristics) {
       if (temp.containsKey(characteristic.getName())) {

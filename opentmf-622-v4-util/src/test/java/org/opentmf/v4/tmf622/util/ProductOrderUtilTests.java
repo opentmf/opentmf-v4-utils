@@ -1,11 +1,5 @@
 package org.opentmf.v4.tmf622.util;
 
-import static org.opentmf.commons.util.JacksonUtil.fileToObject;
-import static org.opentmf.commons.util.ListUtil.safeMutable;
-import static org.opentmf.v4.tmf622.util.ProductOrderUtil.findProductCharacteristicsBySpecificationId;
-import static org.opentmf.v4.tmf622.util.ProductOrderUtil.findProductOrderItemById;
-import static org.opentmf.v4.tmf622.util.ProductOrderUtil.isBundle;
-import static org.opentmf.v4.tmf622.util.ProductOrderUtil.validateOrder;
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -13,17 +7,22 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.opentmf.commons.util.JacksonUtil.fileToObject;
+import static org.opentmf.commons.util.ListUtil.safeMutable;
+import static org.opentmf.v4.tmf622.util.ProductOrderUtil.findProductCharacteristicsBySpecificationId;
+import static org.opentmf.v4.tmf622.util.ProductOrderUtil.findProductOrderItemById;
+import static org.opentmf.v4.tmf622.util.ProductOrderUtil.isBundle;
+import static org.opentmf.v4.tmf622.util.ProductOrderUtil.validateOrder;
 
-import org.opentmf.v4.tmf622.model.OrderItemRelationship;
-import org.opentmf.v4.tmf622.model.ProductOrder;
-import org.opentmf.v4.tmf622.model.ProductOrderCreate;
-import org.opentmf.v4.tmf622.model.ProductOrderItem;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import org.junit.jupiter.api.Test;
-import org.opentmf.v4.tmf622.util.ProductOrderUtil;
+import org.opentmf.tmf622.model.OrderItemRelationship;
+import org.opentmf.tmf622.model.ProductOrder;
+import org.opentmf.tmf622.model.ProductOrderCreate;
+import org.opentmf.tmf622.model.ProductOrderItem;
 
 class ProductOrderUtilTests {
 
@@ -36,7 +35,7 @@ class ProductOrderUtilTests {
     item2.setId("item2");
     productOrder.setProductOrderItems(List.of(item1, item2));
 
-    ProductOrderItem foundItem = ProductOrderUtil.findProductOrderItemById(productOrder, "item1");
+    var foundItem = ProductOrderUtil.findProductOrderItemById(productOrder, "item1");
     assertNotNull(foundItem);
     assertEquals("item1", foundItem.getId());
   }

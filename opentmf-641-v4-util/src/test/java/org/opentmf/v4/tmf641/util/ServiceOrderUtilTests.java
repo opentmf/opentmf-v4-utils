@@ -9,10 +9,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import org.opentmf.v4.tmf641.model.ServiceOrder;
-import org.opentmf.v4.tmf641.model.ServiceOrderItem;
-import org.opentmf.v4.tmf641.model.ServiceOrderItemRef;
-import org.opentmf.v4.tmf641.model.ServiceOrderItemRelationship;
+import org.opentmf.tmf641.model.ServiceOrder;
+import org.opentmf.tmf641.model.ServiceOrderItem;
+import org.opentmf.tmf641.model.ServiceOrderItemRef;
+import org.opentmf.tmf641.model.ServiceOrderItemRelationship;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

@@ -1,6 +1,6 @@
 package org.opentmf.v4.common.util;
 
-import org.opentmf.v4.common.model.Note;
+import org.opentmf.common.model.INote;
 import java.util.Collection;
 import lombok.Generated;
 
@@ -21,7 +21,7 @@ public class NoteUtil {
    * @param text the text to match against note.getText()
    * @return true if any note in the collection contains the requested text.
    */
-  public static boolean noteListContainsText(Collection<Note> notes, String text) {
+  public static boolean noteListContainsText(Collection<? extends INote> notes, String text) {
     return notes.stream().filter(note -> note.getText() != null)
         .anyMatch(note -> note.getText().contains(text));
   }
