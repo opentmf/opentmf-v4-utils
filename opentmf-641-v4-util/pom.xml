@@ -8,6 +8,7 @@
   </parent>
 
   <artifactId>opentmf-641-v4-util</artifactId>
+  <name>opentmf-641-v4-util</name>
 
   <properties>
     <opentmf-641-v4-api.version>4.1.0.10</opentmf-641-v4-api.version>

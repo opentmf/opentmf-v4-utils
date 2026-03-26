@@ -8,6 +8,7 @@
   </parent>
 
   <artifactId>opentmf-common-v4-util</artifactId>
+  <name>opentmf-common-v4-util</name>
 
   <properties>
     <opentmf-common-v4-api.version>4.2.0.10</opentmf-common-v4-api.version>

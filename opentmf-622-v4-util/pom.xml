@@ -8,6 +8,7 @@
   </parent>
 
   <artifactId>opentmf-622-v4-util</artifactId>
+  <name>opentmf-622-v4-util</name>
 
   <properties>
     <opentmf-622-v4-api.version>4.0.0.10</opentmf-622-v4-api.version>
